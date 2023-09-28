@@ -18,6 +18,7 @@ class Product(models.Model):
     sku = models.CharField(max_length=10)
     subtitle = models.CharField(max_length=200)
     description = models.TextField(max_length=50000)
+    quantitiy = models.IntegerField()
     tags = TaggableManager()
     video_url = models.URLField(null=True,blank=True)
     slug = models.SlugField(null=True,blank=True)
