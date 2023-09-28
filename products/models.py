@@ -1,21 +1,26 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.utils import timezone
+from django.contrib.auth.models import User
+
+from taggit.managers import TaggableManager
 
 
 
 
-
-
+FLAG_CHOICES =(('Sale','Sale'),('New','New'),('Feature','Feature'))
 
 class Product(models.Model):
     name = models.CharField(max_length=120)
     image = models.ImageField(upload_to='product')
     price = models.FloatField()
-
-
-
-
+    flage = models.CharField(max_length=10,choices= FLAG_CHOICES)
+    brand = models.ForeignKey('Brand',related_name='product_brand',on_delete=models.SET_NULL,null=True)
+    sku = models.CharField(max_length=10)
+    subtitle = models.CharField(max_length=200)
+    description = models.TextField(max_length=50000)
+    tags = TaggableManager()
+    video_url = models.URLField(null=True,blank=True)
+    slug = models.SlugField(null=True,blank=True)
 
 class ProductImage(models.Model):
     product = models.ForeignKey (Product,related_name= 'product_image',on_delete=models.CASCADE)
@@ -23,9 +28,17 @@ class ProductImage(models.Model):
 
 
 
-class Review (models.Model):
-    user = models.ForeignKey(User,on_delete=models.SET_NULL,related_name='review_user',name=True,blank=True)
-    product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name='review_product')
+class Brand(models.Model):
+    name = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='brands')
+    slug = models.SlugField(null=True,blank=True)
+
+
+
+class Review(models.Model):
+    user = models.ForeignKey(User,related_name='review_user',on_delete=models.SET_NULL,null=True,blank=True)
+    product = models.ForeignKey(Product,related_name='review_product',on_delete=models.CASCADE)
     review = models.TextField(max_length=500)
-    created_at = models.DateField(default=timezone.now)
     rate = models.IntegerField()
+    created_at = models.DateTimeField(default=timezone.now)
+    
