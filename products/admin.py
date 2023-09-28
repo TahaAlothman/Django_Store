@@ -3,12 +3,12 @@ from django_summernote.admin import SummernoteModelAdmin
 from .models import Product, ProductImage,Brand,Review
 
 
-
+class ProductImagesInline(admin.TabularInline):
+    model = ProductImage
 
 class ProductAdmin(SummernoteModelAdmin):
     summernote_fields = '__all__'
-
-
+    inlines = [ProductImagesInline]
 
 
 
