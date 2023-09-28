@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _
 
 
 
@@ -10,17 +11,17 @@ from django.utils.text import slugify
 FLAG_CHOICES =(('Sale','Sale'),('New','New'),('Feature','Feature'))
 
 class Product(models.Model):
-    name = models.CharField(max_length=120)
-    image = models.ImageField(upload_to='product')
-    price = models.FloatField()
-    flage = models.CharField(max_length=10,choices= FLAG_CHOICES)
-    brand = models.ForeignKey('Brand',related_name='product_brand',on_delete=models.SET_NULL,null=True)
-    sku = models.CharField(max_length=10)
-    subtitle = models.CharField(max_length=200)
-    description = models.TextField(max_length=50000)
-    quantitiy = models.IntegerField()
+    name = models.CharField(_('Name'),max_length=120)
+    image = models.ImageField(_('Image'),upload_to='product')
+    price = models.FloatField(_('Price'))
+    flag = models.CharField(_('flag'),max_length=10,choices= FLAG_CHOICES)
+    brand = models.ForeignKey('Brand',verbose_name=_('Brand'),related_name='product_brand',on_delete=models.SET_NULL,null=True)
+    sku = models.CharField(_('SKU'),max_length=10)
+    subtitle = models.CharField(_('Subtitle'),max_length=200)
+    description = models.TextField(_('Description'),max_length=50000)
+    quantitiy = models.IntegerField(_('Quantity'))
     tags = TaggableManager()
-    video_url = models.URLField(null=True,blank=True)
+    video_url = models.URLField(_('Video URL'),null=True,blank=True)
     slug = models.SlugField(null=True,blank=True)
 
 
