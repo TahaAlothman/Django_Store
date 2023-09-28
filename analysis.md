@@ -1,11 +1,11 @@
 Products :
     - name
     - image
-    - images
+    - images   *
     - price
-    - reviews
+    - reviews  *
     - flag
-    - brand
+    - brand   *
     - sku
     - subtitle
     - description
