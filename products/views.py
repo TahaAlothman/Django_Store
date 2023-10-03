@@ -13,6 +13,7 @@ def test(request):
 
 class ProductList(ListView):
     model = Product
+    paginate_by = 100
 
 
 
