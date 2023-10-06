@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "taggit",
     'django_summernote',
+    'rest_framework',
 
     # my apps
     'products',
