@@ -27,8 +27,8 @@ def add_products(n):
      for x in range(n):
         Product.objects.create(
             name = fake.name(),
-            image=f"product/{images[random.randint(0,9)]}" ,
-            price = round(random.uniform(20.99,99.99),2)   ,
+            image=f"product/{images[random.randint(0,9)]}",
+            price = round(random.uniform(20.99,99.99),2),
             flag = flags [random.randint(0,2)]  ,
             brand = Brand.objects.get(id =random.randint(1,55)) ,
             sku = random.randint(1000,10000000) ,

@@ -30,9 +30,10 @@ class ProductListAPI(generics.ListAPIView):
     pagination_class = MyPagination
     # filter_backends = [DjangoFilterBackend]
     # filterset_fields = ['brand', 'flag']
-    filter_backends = [filters.SearchFilter,DjangoFilterBackend]
+    filter_backends = [filters.SearchFilter,DjangoFilterBackend,filters.OrderingFilter]
     search_fields = ['name', 'description']
     filterset_fields = ['brand', 'flag']
+    ordering_fields = ['price']
 
 class ProductDetailAPI(generics.RetrieveAPIView):
     serializer_class =ProductDetailSerializer
