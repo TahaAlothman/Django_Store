@@ -6,6 +6,7 @@ from rest_framework import filters
 from .serializers import ProductDetailSerializer,ProductListSerializer,BrandDetailSerializer,BrandListSerializer
 from .models import Product , Brand
 from .mypagination import MyPagination
+from .myfilters import ProductFilter
 
 # @api_view(['GET'])
 # def product_list_api(request):
@@ -34,6 +35,7 @@ class ProductListAPI(generics.ListAPIView):
     search_fields = ['name', 'description']
     filterset_fields = ['brand', 'flag']
     ordering_fields = ['price']
+    filterset_class = ProductFilter
 
 class ProductDetailAPI(generics.RetrieveAPIView):
     serializer_class =ProductDetailSerializer
