@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Order,OrderDetail,Cart,CartDetail
-
+from settings.models import DeliveryFee
 
 
 
@@ -12,4 +12,9 @@ def order_list(request):
 def checkout(request):
     cart =Cart.objects.get(user=request.user,status='inprogress')
     cart_detail = CartDetail.objects.filter(cart=cart)
-    return render(request,'orders/checkout.html',{'cart': cart,'cart_detail':cart_detail})
+    delivery_fee = DeliveryFee.objects.last().fee
+    return render(request,'orders/checkout.html',{
+        'cart': cart,
+        'cart_detail':cart_detail,
+        'delivery_fee':delivery_fee
+        })
