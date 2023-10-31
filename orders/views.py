@@ -15,6 +15,7 @@ def checkout(request):
     delivery_fee = DeliveryFee.objects.last().fee
     sub_total =cart.cart_total()
     total = sub_total + delivery_fee
+    discount = 0
 
 
     return render(request,'orders/checkout.html',{
@@ -22,5 +23,6 @@ def checkout(request):
         'cart_detail':cart_detail,
         'delivery_fee':delivery_fee,
         'sub_total':sub_total,
-        'total': total
+        'total': total,
+        'discount':discount
         })
