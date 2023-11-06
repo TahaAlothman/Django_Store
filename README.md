@@ -1,6 +1,6 @@
 # Django_Store
 
-# Django Store
+
 
 Django Store is an Amazon clone built using Django, Django Rest Framework, and Javascript. It aims to replicate the core functionality of the popular e-commerce platform and serve as a starting point for building similar online stores.
 
