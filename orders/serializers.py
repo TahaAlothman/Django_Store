@@ -22,7 +22,7 @@ class OrderDetailSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class OrderSerializer(serializers.ModelSerializer):
+class OrderListSerializer(serializers.ModelSerializer):
     order_detail = OrderDetailSerializer(many=True)
     class Meta:
         model = Order
