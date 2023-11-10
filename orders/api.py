@@ -55,3 +55,31 @@ class OrderListAPI(generics.ListAPIView):
 class OrderDetailAPI(generics.RetrieveAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderListSerializer
+
+
+
+class CreateOrderAPI(generics.GenericAPIView):
+    def get(self,request,*args, **kwargs):        
+        user = User.objects.get(username=self.kwargs['username'])
+        cart = Cart.objects.get(user=user,status='inprogress')
+        cart_detail = CartDetail.objects.filter(cart=cart)
+        
+        # cart ----> order
+        new_order = Order.objects.create(
+            user = user , 
+            coupon = cart.coupon,
+            order_total_discount = cart.order_total_discount,
+        )
+        
+        # cart_detail --> order detail 
+        for object in cart_detail:
+            OrderDetail.objects.create(
+                order = new_order , 
+                product = object.product , 
+                quantity = object.quantity , 
+                price = object.product.price , 
+                total = object.total
+                )
+        cart.status = 'completed'
+        cart.save()
+        return Response({'message':'Your Order Was Created Succeefully'})
