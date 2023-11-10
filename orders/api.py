@@ -1,10 +1,12 @@
 from rest_framework import generics
 from rest_framework.response import Response
-from .serializers import CartSerializer , OrderListSerializer , OrderDetailSerializer 
+from .serializers import CartSerializer  , OrderListSerializer , OrderDetailSerializer 
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 from products.models import Product , Brand
 from .models import Cart , CartDetail , Order , OrderDetail , Coupon
-
+import datetime
+from settings.models import DeliveryFee
 class CartDetailCreateDeleteAPI(generics.GenericAPIView):
     serializer_class = CartSerializer
     
@@ -83,3 +85,27 @@ class CreateOrderAPI(generics.GenericAPIView):
         cart.status = 'completed'
         cart.save()
         return Response({'message':'Your Order Was Created Succeefully'})
+    
+
+class ApplyCouponAPI(generics.GenericAPIView):
+    
+    def post(self,request,*args, **kwargs):
+        user = User.objects.get(username=self.kwargs['username'])
+        cart = Cart.objects.get(user=user,status='inprogress')
+        
+        coupon = get_object_or_404(Coupon , code=request.data['coupon_code'])
+        if coupon and coupon.quantity > 0 :
+            today_date = datetime.datetime.today().date()
+            if today_date >= coupon.start_date and today_date <= coupon.end_date:
+                coupon_value = sub_total / 100*coupon.discount
+                sub_total = sub_total - coupon_value
+                
+                
+                cart.coupon = coupon
+                cart.order_total_discount = sub_total
+                coupon.quantity -= 1
+                cart.save()
+                coupon.save()
+                return Response({'message':'coupon was applied successfully'})
+            return Response({'message':'coupn is not working'})
+        return Response({'message':'coupn is not valid'})
