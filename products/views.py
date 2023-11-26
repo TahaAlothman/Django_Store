@@ -1,3 +1,4 @@
+from os import name
 from typing import Any
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
@@ -11,7 +12,10 @@ def mydebug(request):
     #data = Product.objects.filter(price__gt=90)
     #data = Product.objects.filter(price__gte=90)
     #data = Product.objects.filter(price__lte=90)
-    data = Product.objects.filter(price__range=(90,91))
+    #data = Product.objects.filter(price__range=(90,91))
+    data= Product.objects.filter(name__contains='William')
+   
+   
     return render(request,'products/debug.html',{'data':data})
 
 
