@@ -20,9 +20,12 @@ def mydebug(request):
     #data = Product.objects.filter(name__isnull=True)
     #data = Product.objects.filter(price__gt=90,name__startswith='William')
     # 
+    # data = Product.objects.filter(
+    #      Q(price__gt=90) |
+    #      Q(name__startswith='William'))
     data = Product.objects.filter(
-         Q(price__gt=90) |
-         Q(name__startswith='William'))
+         Q(price__gt=90) &
+         ~Q(name__startswith='William'))
     
    
     return render(request,'products/debug.html',{'data':data})
