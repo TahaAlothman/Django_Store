@@ -6,6 +6,14 @@ from .models import Product , ProductImage ,  Review ,Brand
 
 
 
+def mydebug(request):
+    data = Product.objects.all()
+    return render(request,'products/debug.html',{'data':data})
+
+
+
+
+
 def test(request):
     data = Product.objects.all()
     return render (request, "test.html",{"data":data})
