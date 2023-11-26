@@ -14,7 +14,8 @@ def mydebug(request):
     #data = Product.objects.filter(price__lte=90)
     #data = Product.objects.filter(price__range=(90,91))
     #data= Product.objects.filter(name__contains='William')
-    data= Product.objects.filter(name__startswith='William')
+    #data= Product.objects.filter(name__startswith='William')
+    data= Product.objects.filter(name__endswith='Hall')
    
    
     return render(request,'products/debug.html',{'data':data})
