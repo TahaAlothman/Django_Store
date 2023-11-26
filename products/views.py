@@ -27,7 +27,8 @@ def mydebug(request):
     #      Q(price__gt=90) |
     #      ~Q(name__startswith='William'))
     #data = Product.objects.filter(price =F('quantitiy'))
-    data = Product.objects.order_by('price')
+    #data = Product.objects.order_by('price')
+    data = Product.objects.order_by('-price')
    
     return render(request,'products/debug.html',{'data':data})
 
