@@ -1,4 +1,5 @@
 from os import name
+from pickle import TRUE
 from typing import Any
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
@@ -15,7 +16,8 @@ def mydebug(request):
     #data = Product.objects.filter(price__range=(90,91))
     #data= Product.objects.filter(name__contains='William')
     #data= Product.objects.filter(name__startswith='William')
-    data= Product.objects.filter(name__endswith='Hall')
+    #data= Product.objects.filter(name__endswith='Hall')
+    data= Product.objects.filter(name__isnull=True)
    
    
     return render(request,'products/debug.html',{'data':data})
