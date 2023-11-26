@@ -4,7 +4,7 @@ from typing import Any
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import Product , ProductImage ,  Review ,Brand
-from django.db.models import Q
+from django.db.models import Q , F
 
 
 
@@ -23,10 +23,10 @@ def mydebug(request):
     # data = Product.objects.filter(
     #      Q(price__gt=90) |
     #      Q(name__startswith='William'))
-    data = Product.objects.filter(
-         Q(price__gt=90) |
-         ~Q(name__startswith='William'))
-    
+    # data = Product.objects.filter(
+    #      Q(price__gt=90) |
+    #      ~Q(name__startswith='William'))
+    data = Product.objects.filter(price =F('quantitiy'))
    
     return render(request,'products/debug.html',{'data':data})
 
