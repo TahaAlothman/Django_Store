@@ -153,3 +153,16 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100
 }
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
+#das problem wurde durch diesen Code gelöst,das Problem war,dass js wurde nicht in richtigen Typ aufgelöst
+#quelle:https://stackoverflow.com/questions/65630742/javascript-file-loading-problem-in-a-web-browser-relating-to-mime-types-contex
+
+
+import mimetypes
+mimetypes.add_type("application/javascript", ".js", True)
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+    }
