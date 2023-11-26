@@ -10,7 +10,7 @@ def mydebug(request):
     #data = Product.objects.all()
     #data = Product.objects.filter(price__gt=90)
     #data = Product.objects.filter(price__gte=90)
-    data = Product.objects.filter(price__lt=90)
+    data = Product.objects.filter(price__lte=90)
     return render(request,'products/debug.html',{'data':data})
 
 
