@@ -24,7 +24,7 @@ def mydebug(request):
     #      Q(price__gt=90) |
     #      Q(name__startswith='William'))
     data = Product.objects.filter(
-         Q(price__gt=90) &
+         Q(price__gt=90) |
          ~Q(name__startswith='William'))
     
    
