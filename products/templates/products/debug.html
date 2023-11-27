@@ -7,10 +7,10 @@
 </head>
 <body>
     <ul>
-       <li>{{data}}</li>
-        {% comment %} {% for object in data  %}
+       {% comment %} <li>{{data}}</li> {% endcomment %}
+        {% for object in data  %}
         <li>{{object.name}} {{object.brand}}</li>  
-        {% endfor %} {% endcomment %}
+        {% endfor %} 
     
         
     </ul>

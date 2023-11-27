@@ -4,7 +4,7 @@ from typing import Any
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import Product , ProductImage ,  Review ,Brand
-from django.db.models import Q , F
+from django.db.models import Q , F , Value
 from django.db.models.aggregates import Min , Max , Sum , Count , Avg
 
 
@@ -39,12 +39,13 @@ def mydebug(request):
     #data = Product.objects.values('name','price')
     #data = Product.objects.only('name','price')
     #data = Product.objects.defer('video_url','description')
-    #data=Product.objects.select_related('brand').all()  #=====> foreignkey
-    #data=Product.objects.prefetch_related('brand').all()  #=====> many-to-many
+    #data=Product.objects.select_related('brand').all()  #=====> foreignkey         IMPORTANT
+    #data=Product.objects.prefetch_related('brand').all()  #=====> many-to-many       IMPORTANT
     #data=Product.objects.aggregate(Sum('price'))
     #data=Product.objects.aggregate(Avg('price'))
     #data=Product.objects.aggregate(Sum('quantitiy'))
-    data=Product.objects.aggregate(mysum=Sum('quantitiy'),myavr=Avg('price'))
+    #data=Product.objects.aggregate(mysum=Sum('quantitiy'),myavr=Avg('price'))
+    data = Product.objects.annotate(is_new=Value(True))
     return render(request,'products/debug.html',{'data':data})
 
 
