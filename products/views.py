@@ -19,7 +19,8 @@ def mydebug(request):
     #data = Product.objects.filter(name__endswith='Hall')
     #data = Product.objects.filter(name__isnull=True)
     #data = Product.objects.filter(price__gt=90,name__startswith='William')
-    # 
+    
+    #   Q F
     # data = Product.objects.filter(
     #      Q(price__gt=90) |
     #      Q(name__startswith='William'))
@@ -27,25 +28,35 @@ def mydebug(request):
     #      Q(price__gt=90) |
     #      ~Q(name__startswith='William'))
     #data = Product.objects.filter(price =F('quantitiy'))
+    
+    
     #data = Product.objects.order_by('price')
     #data = Product.objects.order_by('-price')
     #data = Product.objects.order_by('price','name')
     #data = Product.objects.order_by('price').reverse
     #data = Product.objects.filter(price__gt=99).order_by('price').reverse
     #data = Product.objects.order_by('price')[:10]
-   # data = Product.objects.order_by('price')[0]
-   # data = Product.objects.earliest('price')
+    #data = Product.objects.order_by('price')[0]
+    #data = Product.objects.earliest('price')
     #data = Product.objects.latest('price')
     #data = Product.objects.values('name','price')
     #data = Product.objects.only('name','price')
     #data = Product.objects.defer('video_url','description')
     #data=Product.objects.select_related('brand').all()  #=====> foreignkey         IMPORTANT
     #data=Product.objects.prefetch_related('brand').all()  #=====> many-to-many       IMPORTANT
+    
+    #'Min , Max , Sum , Count , Avg'
+    
     #data=Product.objects.aggregate(Sum('price'))
     #data=Product.objects.aggregate(Avg('price'))
     #data=Product.objects.aggregate(Sum('quantitiy'))
     #data=Product.objects.aggregate(mysum=Sum('quantitiy'),myavr=Avg('price'))
-    data = Product.objects.annotate(is_new=Value(True))
+
+
+    #Add new Attribute
+         
+    #data = Product.objects.annotate(is_new=Value(True))
+    data = Product.objects.annotate(price_with_tax=F('price')*1.25)
     return render(request,'products/debug.html',{'data':data})
 
 
