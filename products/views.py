@@ -34,7 +34,8 @@ def mydebug(request):
     #data = Product.objects.filter(price__gt=99).order_by('price').reverse
     #data = Product.objects.order_by('price')[:10]
    # data = Product.objects.order_by('price')[0]
-    data = Product.objects.earliest('price')
+   # data = Product.objects.earliest('price')
+    data = Product.objects.latest('price')
     return render(request,'products/debug.html',{'data':data})
 
 
