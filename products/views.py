@@ -29,7 +29,7 @@ def mydebug(request):
     #data = Product.objects.filter(price =F('quantitiy'))
     #data = Product.objects.order_by('price')
     #data = Product.objects.order_by('-price')
-    data = Product.objects.order_by('price','name')
+    #data = Product.objects.order_by('price','name')
    
     return render(request,'products/debug.html',{'data':data})
 
