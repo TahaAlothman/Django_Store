@@ -43,7 +43,8 @@ def mydebug(request):
     #data=Product.objects.prefetch_related('brand').all()  #=====> many-to-many
     #data=Product.objects.aggregate(Sum('price'))
     #data=Product.objects.aggregate(Avg('price'))
-    data=Product.objects.aggregate(Sum('quantitiy'))
+    #data=Product.objects.aggregate(Sum('quantitiy'))
+    data=Product.objects.aggregate(mysum=Sum('quantitiy'),myavr=Avg('price'))
     return render(request,'products/debug.html',{'data':data})
 
 
