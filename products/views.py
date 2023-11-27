@@ -38,7 +38,8 @@ def mydebug(request):
     #data = Product.objects.latest('price')
     #data = Product.objects.values('name','price')
     #data = Product.objects.only('name','price')
-    data = Product.objects.defer('video_url','description')
+    #data = Product.objects.defer('video_url','description')
+    data=Product.objects.select_related('brand').all()  #=====> foreignkey
     return render(request,'products/debug.html',{'data':data})
 
 
