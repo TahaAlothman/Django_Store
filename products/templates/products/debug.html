@@ -7,9 +7,9 @@
 </head>
 <body>
     <ul>
-        
-        <li>{{data}}</li>  
-     
+        {% for object in data  %}
+        <li>{{object.name}} {{object.price}}</li>  
+        {% endfor %}
     
         
     </ul>
