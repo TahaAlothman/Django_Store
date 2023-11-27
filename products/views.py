@@ -42,7 +42,8 @@ def mydebug(request):
     #data=Product.objects.select_related('brand').all()  #=====> foreignkey
     #data=Product.objects.prefetch_related('brand').all()  #=====> many-to-many
     #data=Product.objects.aggregate(Sum('price'))
-    data=Product.objects.aggregate(Avg('price'))
+    #data=Product.objects.aggregate(Avg('price'))
+    data=Product.objects.aggregate(Sum('quantitiy'))
     return render(request,'products/debug.html',{'data':data})
 
 
