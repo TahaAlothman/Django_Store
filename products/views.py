@@ -30,7 +30,7 @@ def mydebug(request):
     #data = Product.objects.order_by('price')
     #data = Product.objects.order_by('-price')
     #data = Product.objects.order_by('price','name')
-   
+    data = Product.objects.order_by('price').reverse
     return render(request,'products/debug.html',{'data':data})
 
 
