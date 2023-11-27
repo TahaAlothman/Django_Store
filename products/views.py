@@ -37,7 +37,8 @@ def mydebug(request):
    # data = Product.objects.earliest('price')
     #data = Product.objects.latest('price')
     #data = Product.objects.values('name','price')
-    data = Product.objects.only('name','price')
+    #data = Product.objects.only('name','price')
+    data = Product.objects.defer('video_url','description')
     return render(request,'products/debug.html',{'data':data})
 
 
