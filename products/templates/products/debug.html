@@ -7,9 +7,10 @@
 </head>
 <body>
     <ul>
-        {% for object in data  %}
+       <li>{{data}}</li>
+        {% comment %} {% for object in data  %}
         <li>{{object.name}} {{object.brand}}</li>  
-        {% endfor %}
+        {% endfor %} {% endcomment %}
     
         
     </ul>
