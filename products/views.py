@@ -36,7 +36,8 @@ def mydebug(request):
    # data = Product.objects.order_by('price')[0]
    # data = Product.objects.earliest('price')
     #data = Product.objects.latest('price')
-    data = Product.objects.values('name','price')
+    #data = Product.objects.values('name','price')
+    data = Product.objects.only('name','price')
     return render(request,'products/debug.html',{'data':data})
 
 
