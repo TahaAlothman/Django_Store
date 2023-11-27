@@ -39,7 +39,8 @@ def mydebug(request):
     #data = Product.objects.values('name','price')
     #data = Product.objects.only('name','price')
     #data = Product.objects.defer('video_url','description')
-    data=Product.objects.select_related('brand').all()  #=====> foreignkey
+    #data=Product.objects.select_related('brand').all()  #=====> foreignkey
+    data=Product.objects.prefetch_related('brand').all()  #=====> many-to-many
     return render(request,'products/debug.html',{'data':data})
 
 
