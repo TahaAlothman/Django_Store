@@ -6,10 +6,11 @@ from django.views.generic import ListView, DetailView
 from .models import Product , ProductImage ,  Review ,Brand
 from django.db.models import Q , F , Value
 from django.db.models.aggregates import Min , Max , Sum , Count , Avg
+from django.views.decorators.cache import cache_page
 
-
+@cache_page(60 * 1)
 def mydebug(request):
-    #data = Product.objects.all()
+    data = Product.objects.all()
     #data = Product.objects.filter(price__gt=90)
     #data = Product.objects.filter(price__gte=90)
     #data = Product.objects.filter(price__lte=90)
