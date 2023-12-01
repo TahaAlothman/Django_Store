@@ -8,9 +8,13 @@ from django.db.models import Q , F , Value
 from django.db.models.aggregates import Min , Max , Sum , Count , Avg
 from django.views.decorators.cache import cache_page
 
-@cache_page(60 * 1)
+
+
+
+from .tasks import send_emails
+# @cache_page(60 * 1)
 def mydebug(request):
-    data = Product.objects.all()
+    
     #data = Product.objects.filter(price__gt=90)
     #data = Product.objects.filter(price__gte=90)
     #data = Product.objects.filter(price__lte=90)
@@ -58,6 +62,12 @@ def mydebug(request):
          
     #data = Product.objects.annotate(is_new=Value(True))
     #data = Product.objects.annotate(price_with_tax=F('price')*1.25)
+    data = Product.objects.all()
+
+
+    send_emails.delay()
+
+    
     return render(request,'products/debug.html',{'data':data})
 
 
