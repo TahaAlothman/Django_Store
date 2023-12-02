@@ -12,6 +12,12 @@ from django.views.decorators.cache import cache_page
 
 
 from .tasks import send_emails
+
+
+
+
+
+
 # @cache_page(60 * 1)
 def mydebug(request):
     

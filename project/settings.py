@@ -174,7 +174,7 @@ CACHES = {
     }
 }
 
-LOCALE_PATHS = ['locale']
+#LOCALE_PATHS = ['locale']
 
 CELERY_BROKER_URL = 'redis://redis:6379/0'
 CELERY_BACKEND_RESULTS = 'redis://redis:6379/0'
