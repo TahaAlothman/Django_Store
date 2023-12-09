@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "django.middleware.locale.LocaleMiddleware",
     'django.middleware.common.CommonMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -174,7 +175,11 @@ CACHES = {
     }
 }
 
-#LOCALE_PATHS = ['locale']
+LOCALE_PATHS = ['locale']
+LANGUAGES = [
+    ("ar", ("Arabic")),
+    ("en", ("English")),
+]
 
-CELERY_BROKER_URL = 'redis://redis:6379/0'
-CELERY_BACKEND_RESULTS = 'redis://redis:6379/0'
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_BACKEND_RESULTS = 'redis://localhost:6379/0'

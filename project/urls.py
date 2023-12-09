@@ -29,7 +29,8 @@ urlpatterns = [
     path("orders/", include('orders.urls')),
     path('summernote/', include('django_summernote.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
-    path('',home)
+    path('',home),
+    path("i18n/", include("django.conf.urls.i18n")),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
