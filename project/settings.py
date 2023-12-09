@@ -179,6 +179,7 @@ LOCALE_PATHS = ['locale']
 LANGUAGES = [
     ("ar", ("Arabic")),
     ("en", ("English")),
+    ("de", ("Deutsch")),
 ]
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
