@@ -7,5 +7,6 @@ import time
 def send_emails():
     for x in range(10):
         time.sleep(5)
-        print(f'sending email to user number {x}')
+        print(f'sending ..... {x}')
         
+print('done...')
