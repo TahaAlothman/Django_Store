@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_filters',
     "debug_toolbar",
     'django_celery_results',
+    "django_bootstrap5",
 
     # my apps
     'products',
@@ -191,3 +192,5 @@ CELERY_RESULT_BACKEND = 'django-db'
 AUTHENTICATION_BACKENDS = [
     'accounts.backend.EmailOrUsernameLogin'
 ]
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
