@@ -17,3 +17,7 @@ class EmailOrUsernameLogin(ModelBackend):
             except User.DoesNotExist:
                 return None
             
+        if user.check_password(password):
+            return user
+        
+        return None
