@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 
-
-
 {% block body %}
-
         <!--=====================================
                     BANNER PART START
         =======================================-->
@@ -78,7 +75,7 @@
                         <li>
                             <a class="suggest-card" href="shop-4column.html">
                                 <img src="{{object.image.url}}" alt="suggest">
-                                <h5>{{object}}<span>34 items</span></h5>
+                                <h5>{{object}} <span>34 items</span></h5>
                             </a>
                         </li>
                     {% endfor %}
@@ -103,7 +100,7 @@
                     </div>
                 </div>
                 <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
-                  {% for object in sale_products  %} 
+                    {% for object in sale_products %}
                         <div class="col">
                             <div class="product-card">
                                 <div class="product-media">
@@ -113,7 +110,7 @@
                                     <button class="product-wish wish">
                                         <i class="fas fa-heart"></i>
                                     </button>
-                                    <a class="product-image" href="product-video.html">
+                                    <a class="product-image" href="/products/{{object.slug}}">
                                         <img src="{{object.image.url}}" alt="product">
                                     </a>
                                     <div class="product-widget">
@@ -132,11 +129,11 @@
                                         <a href="product-video.html">(3)</a>
                                     </div>
                                     <h6 class="product-name">
-                                        <a href="product-video.html">{{object}}</a>
+                                        <a href="/products/{{object.slug}}">{{object}}</a>
                                     </h6>
                                     <h6 class="product-price">
-                                       
-                                        <span>{{object.price}}</span>
+                                        <del>$34</del>
+                                        <span>${{object.price}}</span>
                                     </h6>
                                     <button class="product-add" title="Add to Cart">
                                         <i class="fas fa-shopping-basket"></i>
@@ -150,12 +147,12 @@
                                 </div>
                             </div>
                         </div>
-                    {% endfor %} 
+                    {% endfor %}
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-btn-25">
-                            <a href="/products/" class="btn btn-outline">
+                            <a href="/products" class="btn btn-outline">
                                 <i class="fas fa-eye"></i>
                                 <span>show more</span>
                             </a>
@@ -167,6 +164,7 @@
         <!--=====================================
                     RECENT PART END
         =======================================-->
+
 
 
         <!--=====================================
@@ -182,7 +180,7 @@
                     </div>
                 </div>
                 <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2">
-                    {% for object in feature_products %}
+                    {% for object in feature_products %}                   
                         <div class="col">
                             <div class="feature-card">
                                 <div class="feature-media">
@@ -214,8 +212,8 @@
                                         <a href="product-video.html">(3 Reviews)</a>
                                     </div>
                                     <h6 class="feature-price">
-                                        
-                                        <span>{{object.price}}</span>
+                                        <del>$34</del>
+                                        <span>${{object.price}}</span>
                                     </h6>
                                     <p class="feature-desc">{{object.subtitle}}</p>
                                     <button class="product-add" title="Add to Cart">
@@ -235,7 +233,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-btn-25">
-                            <a href="/products/" class="btn btn-outline">
+                            <a href="/products" class="btn btn-outline">
                                 <i class="fas fa-eye"></i>
                                 <span>show more</span>
                             </a>
@@ -247,9 +245,6 @@
         <!--=====================================
                     FEATURE PART END
         =======================================-->
-
-
-
 
 
         <!--=====================================
@@ -267,7 +262,7 @@
                 <div class="row">
                     <div class="col">
                         <ul class="new-slider slider-arrow">
-                           {% for object in new_products  %}
+                            {% for object in new_products %}
                                 <li>
                                     <div class="product-card">
                                         <div class="product-media">
@@ -299,8 +294,7 @@
                                                 <a href="product-video.html">{{object}}</a>
                                             </h6>
                                             <h6 class="product-price">
-                                                
-                                                <span>{{object.price}}</span>
+                                                <span>${{object.price}}</span>
                                             </h6>
                                             <button class="product-add" title="Add to Cart">
                                                 <i class="fas fa-shopping-basket"></i>
@@ -314,14 +308,14 @@
                                         </div>
                                     </div>
                                 </li>
-                            {% endfor %} 
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <div class="section-btn-25">
-                            <a href="/products/" class="btn btn-outline">
+                            <a href="/products" class="btn btn-outline">
                                 <i class="fas fa-eye"></i>
                                 <span>show more</span>
                             </a>
@@ -333,6 +327,7 @@
         <!--=====================================
                     NEW ITEM PART END
         =======================================-->
+
 
 
 
@@ -1769,7 +1764,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-btn-25">
-                            <a href="/products/" class="btn btn-outline">
+                            <a href="shop-4column.html" class="btn btn-outline">
                                 <i class="fas fa-eye"></i>
                                 <span>show more</span>
                             </a>
@@ -1796,7 +1791,7 @@
                     </div>
                 </div>
                 <div class="brand-slider slider-arrow">
-                    {% for object in brands  %}
+                    {% for object in brands %}
                         <div class="brand-wrap">
                             <div class="brand-media">
                                 <img src="{{object.image.url}}" alt="brand">
@@ -1843,7 +1838,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="testimonial-slider slider-arrow">
-                            {% for object in reviews  %}
+                            {% for object in reviews %}
                                 <div class="testimonial-card">
                                     <i class="fas fa-quote-left"></i>
                                     <p>{{object.review}}</p>
