@@ -74,24 +74,6 @@ def activate(request,username):
 
 @login_required
 def dashboard(request):
-    new_products = Product.objects.filter(flag='New').count()
-    sale_products = Product.objects.filter(flag='Sale').count()
-    feature_products = Product.objects.filter(flag='Feature').count()
+   
     
-    users = User.objects.all().count()
-    orders = Order.objects.all().count()
-    products = Product.objects.all().count()
-    brand = Brand.objects.all().count()
-    reviews = Review.objects.all().count()
-    
-    return render(request,'accounts/dashboard.html',{
-        'new_products': new_products , 
-        'sale_products': sale_products , 
-        'feature_products': feature_products , 
-        
-        'users': users , 
-        'orders': orders , 
-        'products': products , 
-        'brand': brand , 
-        'reviews': reviews
-    })
+    return render(request,'accounts/dashboard.html',{})
