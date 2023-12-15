@@ -31,3 +31,19 @@ services:
     environment:
       - CELERY_BROKER_URL = 'redis://redis:6379/0'
       - CELERY_BACKEND_RESULTS = 'redis://redis:6379/0'
+  
+
+  db:
+    image: postgresql:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB = amazon
+      - POSTGRES_PASSWORD = postgres
+    volumes:
+      - postgres_data:/var/lib/postgres/data
+
+
+volumes:
+  postgres_data:
