@@ -24,6 +24,7 @@ Markdown==3.4.4
 packaging==23.2
 Pillow==10.0.1
 prompt-toolkit==3.0.41
+psycopg2-binary==2.9.9
 python-dateutil==2.8.2
 python-gettext==5.0
 pytz==2023.3.post1

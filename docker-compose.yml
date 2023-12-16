@@ -11,6 +11,8 @@ services:
       - .:/app
     depends_on:
       - redis
+      #- celery
+    
 
 
   redis:
@@ -25,6 +27,7 @@ services:
     depends_on:
       - redis
       - djangoserver
+      
     volumes:
       - .:/app
     command: celery -A project worker --loglevel=info
@@ -34,13 +37,13 @@ services:
   
 
   db:
-    image: postgresql:latest
+    image: postgres:latest
     ports:
       - "5432:5432"
     environment:
+      - POSTGRES_DB=amazon
       - POSTGRES_USER=postgres
-      - POSTGRES_DB = amazon
-      - POSTGRES_PASSWORD = postgres
+      - POSTGRES_PASSWORD=postgres
     volumes:
       - postgres_data:/var/lib/postgres/data
 
