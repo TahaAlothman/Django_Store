@@ -1,7 +1,7 @@
 from os import name
 from pickle import TRUE
 from typing import Any
-from django.shortcuts import render
+from django.shortcuts import render ,redirect
 from django.views.generic import ListView, DetailView
 from .models import Product , ProductImage ,  Review ,Brand
 from django.db.models import Q , F , Value
@@ -130,4 +130,16 @@ class BrandDetail(ListView):
    
 
 def add_review(request,slug):
-    pass
+    product = Product.objects.get(slug=slug)
+    review = request.POST['review']           #  request.POST.get('review') 
+    rate = request.POST['rating']
+    
+    
+    Review.objects.create(
+        user = request.user , 
+        product = product , 
+        review = review , 
+        rate = rate
+    )
+
+    return redirect(f'/products/{slug}')

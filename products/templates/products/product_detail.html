@@ -143,11 +143,11 @@
                                             </h5>
                                         </div>
                                         <ul class="review-rating">
-                                            <li class="icofont-ui-rating"></li>
-                                            <li class="icofont-ui-rating"></li>
-                                            <li class="icofont-ui-rating"></li>
-                                            <li class="icofont-ui-rating"></li>
-                                            <li class="icofont-ui-rate-blank"></li>
+                                            <li class="icofont-ui-{% if review.rate > 0 %}rating{% else %}{% endif %}"></li>
+                                            <li class="icofont-ui-{% if review.rate > 1 %}rating{% else %}{% endif %}"></li>
+                                            <li class="icofont-ui-{% if review.rate > 2 %}rating{% else %}{% endif %}"></li>
+                                            <li class="icofont-ui-{% if review.rate > 3 %}rating{% else %}{% endif %}"></li>
+                                            <li class="icofont-ui-{% if review.rate > 4 %}rating{% else %}{% endif %}"></li>
                                         </ul>
                                         <p class="review-desc">{{review.review}}</p>
                                     
