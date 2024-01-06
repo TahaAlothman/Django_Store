@@ -127,3 +127,5 @@ class BrandDetail(ListView):
        context = super().get_context_data(**kwargs)
        context['brand'] = Brand.objects.get(slug = self.kwargs['slug'])
        return context
+   
+
