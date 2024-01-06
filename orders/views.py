@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from .models import Order,OrderDetail,Cart,CartDetail, Coupon
 from settings.models import DeliveryFee
+from products.models import Product
 
 
 
@@ -59,3 +60,8 @@ def checkout(request):
         })
 
 
+def add_to_cart(request):
+    product = Product.objects.get(id=request.POST['product_id'])
+    quantity = request.POST['quantity']
+    
+    cart = Cart.objects.get(user=request.user,status='inprogress')
