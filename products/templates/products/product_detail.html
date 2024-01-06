@@ -130,7 +130,7 @@
                         </div>
                        <div class="product-details-frame">
                             <h3 class="frame-title">Reviews (2)</h3>
-                            <ul class="review-list">
+                            <ul class="review-list" id='all-reviews'>
                                 {% include 'includes/product_reviews.html' %}
                             </ul>
                         </div>
@@ -687,4 +687,32 @@
         <!--=====================================
                     NEWSLETTER PART END
         =======================================-->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        
+        <script>
+            $(document).ready(function(){ //wenn die seite geöffnet wird,wird funktion ausgerufen
+                
+                $(document).on('submit','#reviewForm',function(event){ //wenn ich auf submit für den 'reviewForm'drücke,wird event aktiviert
+                    // stop refresh  
+                    event.preventDefault();
+
+                    // ajax 
+                    $.ajax({
+                        type: $(this).attr('method') , //wie werden die daten gesendet
+                        url: $(this).attr('action') , // wo werden die daten gesendet
+                        data: $(this).serialize(),   //welche daten sollten geschickt werden
+                        dataType: 'json',            //was ist die typ oder art haben diese Daten 
+                        success:function(response){    //wenn diese Daten erfolgreich gesendet werden,was wird ausgefürt
+                            $('#all-reviews').html(response['result'])
+                            $('#reviewForm').trigger('reset'); //clear the form
+                        },
+                        error:function(){              //wenn die Daten falsch gesendet werden,was wird dann passieren
+
+                        }
+                    })
+
+                })
+
+            })
+        </script>
     {% endblock body %}
