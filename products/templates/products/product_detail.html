@@ -723,7 +723,9 @@
                     dataType: 'json',            
                     success:function(response){    
                         $('#cart_sidebar').html(response['result'])
-                        
+
+                        var total = $('#total_price')
+                        total.text(response['total'])
                     },
                     error:function(){              
 
