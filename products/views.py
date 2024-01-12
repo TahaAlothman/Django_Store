@@ -143,7 +143,7 @@ def add_review(request,slug):
         review = review , 
         rate = rate
     )
-
+        #review
     reviews = Review.objects.filter(product=product)
     html = render_to_string('includes/product_reviews.html',{'reviews':reviews , request:request})
     return JsonResponse({'result':html})
