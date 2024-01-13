@@ -7,10 +7,22 @@ from products.models import Product
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 
+from django.conf import settings
+import stripe
+from environ import Env
+env = Env()
+env.read_env()
+
+
+
+
+
+
 
 def order_list(request):
     orders = Order.objects.all()
     return render(request,'orders/orders.html',{'orders':orders})
+
 
 
 def checkout(request):
@@ -20,6 +32,8 @@ def checkout(request):
     sub_total =cart.cart_total()
     total = sub_total + delivery_fee
     discount = 0
+
+    pub_key = env('STRIP_API_KEY_PUBLISHABLE')
 
     if request.method == 'POST':
         code = request.POST['coupon_code']  # <==> code = request.POST.get('coupon_code)
@@ -43,7 +57,8 @@ def checkout(request):
                     'delivery_fee': delivery_fee , 
                     'sub_total': round(sub_total,2) , 
                     'total':total , 
-                    'discount':round(coupon_value,2)
+                    'discount':round(coupon_value,2),
+                    'pub_key':pub_key
                 })               
         
         
@@ -57,7 +72,8 @@ def checkout(request):
         'delivery_fee':delivery_fee,
         'sub_total':sub_total,
         'total': total,
-        'discount':discount
+        'discount':discount,
+         'pub_key':pub_key
         })
 
 
@@ -88,7 +104,18 @@ def add_to_cart(request):
 
 
 def process_payment(request):
-    pass
+       checkout_session = stripe.checkout.Session.create(
+            line_items=[
+                {
+                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                    'price': '{{PRICE_ID}}',
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url=settings.DOMAIN + '/orders/checkout/payment/success',
+            cancel_url=settings.DOMAIN + '/orders/checkout/payment/failed',
+        )
 
 def payment_success(request):
     return render(request,'orders/success.html',{'code':'code'})

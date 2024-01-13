@@ -8,7 +8,7 @@ urlpatterns = [
     path('checkout' , checkout),
     path('checkout/payment',process_payment),
     path('checkout/payment/success',payment_success),
-    path('checkout/payment/failed',payment_failed)
+    path('checkout/payment/failed',payment_failed),
     
     
     # api 
