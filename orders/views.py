@@ -83,3 +83,15 @@ def add_to_cart(request):
 
     html = render_to_string('includes/cart_sidebar.html',{'cart_data':cart,'cart_detail_data':cart_detail, request:request})
     return JsonResponse({'result':html,'total':total,'cart_count':cart_count})
+
+
+
+
+def process_payment(request):
+    pass
+
+def process_success(request):
+    return render(request,'orders/success.html',{'code':'code'})
+
+def process_failed(request):
+    return render(request,'orders/failed.html',{'code':'code'})
