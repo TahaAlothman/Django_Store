@@ -90,8 +90,8 @@ def add_to_cart(request):
 def process_payment(request):
     pass
 
-def process_success(request):
+def payment_success(request):
     return render(request,'orders/success.html',{'code':'code'})
 
-def process_failed(request):
+def payment_failed(request):
     return render(request,'orders/failed.html',{'code':'code'})
