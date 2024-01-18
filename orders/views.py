@@ -6,6 +6,7 @@ from settings.models import DeliveryFee
 from products.models import Product
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
 
 from django.conf import settings
 import stripe
@@ -18,13 +19,13 @@ env.read_env()
 
 
 
-
+@login_required
 def order_list(request):
     orders = Order.objects.all()
     return render(request,'orders/orders.html',{'orders':orders})
 
 
-
+@login_required
 def checkout(request):
     cart =Cart.objects.get(user=request.user,status='inprogress')
     cart_detail = CartDetail.objects.filter(cart=cart)
@@ -116,9 +117,12 @@ def process_payment(request):
             success_url=settings.DOMAIN + '/orders/checkout/payment/success',
             cancel_url=settings.DOMAIN + '/orders/checkout/payment/failed',
         )
-
+@login_required
 def payment_success(request):
     return render(request,'orders/success.html',{'code':'code'})
 
+
+
+@login_required
 def payment_failed(request):
     return render(request,'orders/failed.html',{'code':'code'})
