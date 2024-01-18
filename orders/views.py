@@ -144,10 +144,34 @@ def process_payment(request):
 
 @login_required
 def payment_success(request):
-    return render(request,'orders/success.html',{'code':'code'})
+    cart = Cart.objects.get(user=request.user,status='inprogress')
+    cart_detail = CartDetail.objects.filter(cart=cart)
+    
+    # get code from session 
+    order_code = request.session.get('order_code')
+    
+    new_order = Order.objects.create(
+        user = request.user , 
+        coupon = cart.coupon,
+        order_total_discount = cart.order_total_discount,
+        code = order_code
+        )
+        
+    # cart_detail --> order detail 
+    for object in cart_detail:
+        OrderDetail.objects.create(
+            order = new_order , 
+            product = object.product , 
+            quantity = object.quantity , 
+            price = object.product.price , 
+            total = object.total
+            )
+    cart.status = 'completed'
+    cart.save()
+    return render(request,'orders/success.html',{'code':order_code})
 
 
 
 @login_required
 def payment_failed(request):
-    return render(request,'orders/failed.html',{'code':'code'})
+    return render(request,'orders/failed.html')
