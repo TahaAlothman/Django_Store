@@ -137,8 +137,8 @@ def process_payment(request):
             },
         ],
             mode='payment',
-            success_url=settings.DOMAIN + '/orders/checkout/payment/success',
-            cancel_url=settings.DOMAIN + '/orders/checkout/payment/failed',
+            success_url='http://127.0.0.1:8000/orders/checkout/payment/success',
+            cancel_url='http://127.0.0.1:8000/orders/checkout/payment/failed',
         )
     return JsonResponse({'session':checkout_session})
 
