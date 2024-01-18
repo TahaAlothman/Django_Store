@@ -7,6 +7,7 @@ from products.models import Product
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
+from utils.generate_code import generate_code
 
 from django.conf import settings
 import stripe
@@ -105,18 +106,42 @@ def add_to_cart(request):
 
 
 def process_payment(request):
-       checkout_session = stripe.checkout.Session.create(
-            line_items=[
-                {
-                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                    'price': '{{PRICE_ID}}',
-                    'quantity': 1,
+    cart = Cart.objects.get(user=request.user,status='inprogress')
+    delivery_fee = DeliveryFee.objects.last().fee
+    
+    if cart.order_total_discount:
+        total = cart.order_total_discount() + delivery_fee
+
+    else:
+        total = cart.cart_total() + delivery_fee
+        
+    code = generate_code()
+    
+    # store code in session 
+    request.session['order_code'] = code
+    request.session.save()
+      
+    stripe.api_key = env('STRIP_API_KEY_SECRET')  
+    
+    checkout_session = stripe.checkout.Session.create(
+        line_items=[
+            {
+                'price_data' : {
+                    'currency' : 'usd' , 
+                    'product_data' : {
+                        'name' : code
+                    }, 
+                    'unit_amount': int(total*100)
                 },
-            ],
+                'quantity' : 1
+            },
+        ],
             mode='payment',
             success_url=settings.DOMAIN + '/orders/checkout/payment/success',
             cancel_url=settings.DOMAIN + '/orders/checkout/payment/failed',
         )
+    return JsonResponse({'session':checkout_session})
+
 @login_required
 def payment_success(request):
     return render(request,'orders/success.html',{'code':'code'})
