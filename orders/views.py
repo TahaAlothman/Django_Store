@@ -8,6 +8,8 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 from utils.generate_code import generate_code
+from django.http import JsonResponse
+from django.template.loader import render_to_string
 
 from django.conf import settings
 import stripe
@@ -53,17 +55,16 @@ def checkout(request):
                 cart.save()
                 coupon.save()
                 
-                return render(request,'orders/checkout.html',{
+                html = render_to_string('includes/checkout_table.html',{
                     'cart' : cart , 
                     'cart_detail': cart_detail , 
                     'delivery_fee': delivery_fee , 
                     'sub_total': round(sub_total,2) , 
                     'total':total , 
-                    'discount':round(coupon_value,2),
+                    'discount':round(coupon_value,2) , 
                     'pub_key':pub_key
-                })               
-        
-        
+                })
+                return JsonResponse({'result':html})  
 
 
 
